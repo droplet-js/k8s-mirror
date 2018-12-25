@@ -6,16 +6,16 @@ clone:
 
 steps:
 - name: k8s
-  image: docker
-#  privileged: true
-  volumes:
-  - name: docker.sock
-    path: /var/run/docker.sock
+  image: vedwin/centos
   commands:
-  - docker pull k8s.gcr.io/etcd
+  - yum install -y yum-utils \
+    device-mapper-persistent-data \
+    lvm2
+  - yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+  - yum install docker-ce
+  - systemctl start docker
+  - docker run hello-world
+#  - docker pull k8s.gcr.io/etcd
 #  - docker pull k8s.gcr.io/hyperkube
-
-volumes:
-- name: docker.sock
-  host:
-    path: /var/run/docker.sock
