@@ -6,14 +6,19 @@ clone:
 
 steps:
 - name: k8s
-  image: centos
-  entrypoint:
-  - /usr/sbin/init
+  image: docker
   commands:
-  - yum install -y yum-utils device-mapper-persistent-data lvm2
-  - yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-  - yum install -y docker-ce
-  - systemctl start docker
-  - docker run hello-world
-#  - docker pull k8s.gcr.io/etcd
-#  - docker pull k8s.gcr.io/hyperkube
+  - docker pull hello-world
+
+#- name: k8s
+#  image: centos
+#  entrypoint:
+#  - /usr/sbin/init
+#  commands:
+#  - yum install -y yum-utils device-mapper-persistent-data lvm2
+#  - yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+#  - yum install -y docker-ce
+#  - systemctl start docker
+#  - docker run hello-world
+##  - docker pull k8s.gcr.io/etcd
+##  - docker pull k8s.gcr.io/hyperkube
