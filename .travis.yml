@@ -1,4 +1,4 @@
-sudo: required
+language: ruby
 
 services:
   - docker
@@ -10,9 +10,10 @@ before_install:
   - docker login -u ${REGISTRY_USER} -p ${REGISTRY_PASSWORD}
 
 script:
-  - docker pull k8s.gcr.io/etcd:${ETCD_VERSION}
-  - docker tag k8s.gcr.io/etcd:${ETCD_VERSION} ${REGISTRY_USER}/k8s.gcr.io_etcd:${ETCD_VERSION}
-  - docker push ${REGISTRY_USER}/k8s.gcr.io_etcd:${ETCD_VERSION}
-  - docker pull k8s.gcr.io/hyperkube:${HYPERKUBE_VERSION}
-  - docker tag k8s.gcr.io/hyperkube:${HYPERKUBE_VERSION} ${REGISTRY_USER}/k8s.gcr.io_hyperkube:${HYPERKUBE_VERSION}
-  - docker push ${REGISTRY_USER}/k8s.gcr.io_hyperkube:${HYPERKUBE_VERSION}
+  - docker images
+#  - docker pull k8s.gcr.io/etcd:${ETCD_VERSION}
+#  - docker tag k8s.gcr.io/etcd:${ETCD_VERSION} ${REGISTRY_USER}/k8s.gcr.io_etcd:${ETCD_VERSION}
+#  - docker push ${REGISTRY_USER}/k8s.gcr.io_etcd:${ETCD_VERSION}
+#  - docker pull k8s.gcr.io/hyperkube:${HYPERKUBE_VERSION}
+#  - docker tag k8s.gcr.io/hyperkube:${HYPERKUBE_VERSION} ${REGISTRY_USER}/k8s.gcr.io_hyperkube:${HYPERKUBE_VERSION}
+#  - docker push ${REGISTRY_USER}/k8s.gcr.io_hyperkube:${HYPERKUBE_VERSION}
