@@ -8,6 +8,7 @@ steps:
 - name: k8s
   image: docker
   commands:
+  - service docker start
   - docker pull hello-world
 
 #- name: k8s
