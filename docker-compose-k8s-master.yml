@@ -3,3 +3,17 @@ version: "3.7"
 
 # 服务
 services:
+
+  etcd:
+    container_name: etcd
+#    image: k8s.gcr.io/etcd:${ETCD_VERSION}
+    image: v7lin/k8s.gcr.io_etcd:${ETCD_VERSION}
+    restart: always
+    hostname: etcd
+
+  hyperkube:
+    container_name: hyperkube
+#    image: k8s.gcr.io/hyperkube:${HYPERKUBE_VERSION}
+    image: v7lin/k8s.gcr.io_hyperkube:${HYPERKUBE_VERSION}
+    restart: always
+    hostname: hyperkube
