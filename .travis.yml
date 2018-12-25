@@ -11,9 +11,9 @@ before_install:
 
 script:
   - docker pull k8s.gcr.io/etcd:${ETCD_VERSION}
-  - docker tag k8s.gcr.io/etcd:${ETCD_VERSION} v7lin/k8s.gcr.io_etcd:${ETCD_VERSION}
-  - docker push v7lin/k8s.gcr.io_etcd:${ETCD_VERSION}
+  - docker tag k8s.gcr.io/etcd:${ETCD_VERSION} ${REGISTRY_USER}/k8s.gcr.io_etcd:${ETCD_VERSION}
+  - docker push ${REGISTRY_USER}/k8s.gcr.io_etcd:${ETCD_VERSION}
   - docker pull k8s.gcr.io/hyperkube:${HYPERKUBE_VERSION}
-  - docker tag k8s.gcr.io/hyperkube:${HYPERKUBE_VERSION} v7lin/k8s.gcr.io_hyperkube:${HYPERKUBE_VERSION}
-  - docker push v7lin/k8s.gcr.io_hyperkube:${HYPERKUBE_VERSION}
+  - docker tag k8s.gcr.io/hyperkube:${HYPERKUBE_VERSION} ${REGISTRY_USER}/k8s.gcr.io_hyperkube:${HYPERKUBE_VERSION}
+  - docker push ${REGISTRY_USER}/k8s.gcr.io_hyperkube:${HYPERKUBE_VERSION}
 
