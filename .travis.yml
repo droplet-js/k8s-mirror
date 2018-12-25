@@ -7,7 +7,7 @@ before_install:
   - docker -v
 
 script:
-  - docker login --username ${REGISTRY_USER} --password ${REGISTRY_PASSWORD}
+  - docker login --username ${REGISTRY_USER} --password-stdin ${REGISTRY_PASSWORD}
   - docker ps
 #  - docker pull k8s.gcr.io/etcd
 #  - docker pull k8s.gcr.io/hyperkube
