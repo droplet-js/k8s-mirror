@@ -1,21 +1,21 @@
 kind: pipeline
 name: default
 
+clone:
+  disable: true
+
 steps:
 - name: k8s
-  image: centos
+  image: docker
 #  privileged: true
-#  volumes:
-#  - /var/run/docker.sock:/var/run/docker.sock
+  volumes:
+  - name: docker.sock
+    path: /var/run/docker.sock
   commands:
-  - yum install -y yum-utils \
-    device-mapper-persistent-data \
-    lvm2
-  - yum-config-manager \
-    --add-repo \
-    https://download.docker.com/linux/centos/docker-ce.repo
-  - yum install docker-ce
-  - systemctl start docker
-  - docker run hello-world
-#  - docker pull k8s.gcr.io/etcd
+  - docker pull k8s.gcr.io/etcd
 #  - docker pull k8s.gcr.io/hyperkube
+
+volumes:
+- name: docker.sock
+  host:
+    path: /var/run/docker.sock
