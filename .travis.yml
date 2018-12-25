@@ -5,6 +5,7 @@ services:
 
 script:
   - docker pull k8s.gcr.io/etcd:3.2.24
+  - docker pull gcr.io/google_containers/hyperkube-amd64:v1.13.1
   - docker images
   - docker login -u ${REGISTRY_USER} -p ${REGISTRY_PASSWORD}
 #  - docker pull k8s.gcr.io/etcd
