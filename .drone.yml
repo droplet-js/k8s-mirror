@@ -8,7 +8,6 @@ steps:
 - name: k8s
   image: docker
   commands:
-  - systemctl start docker
   - docker pull hello-world
 
 #- name: k8s
