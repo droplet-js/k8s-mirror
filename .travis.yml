@@ -3,10 +3,16 @@ sudo: required
 services:
   - docker
 
+before_install:
+  - docker login -u ${REGISTRY_USER} -p ${REGISTRY_PASSWORD}
+
 script:
   - docker pull k8s.gcr.io/etcd:3.2.24
   - docker pull k8s.gcr.io/hyperkube:v1.13.1
   - docker images
-  - docker login -u ${REGISTRY_USER} -p ${REGISTRY_PASSWORD}
+  - docker tag k8s.gcr.io/etcd:3.2.24 v7lin/k8s.gcr.io_etcd:3.2.24
+  - docker push v7lin/k8s.gcr.io_etcd:3.2.24
+  - docker tag k8s.gcr.io/hyperkube:v1.13.1 v7lin/k8s.gcr.io_hyperkube:v1.13.1
+  - docker push v7lin/k8s.gcr.io_hyperkube:v1.13.1
 #  - docker pull k8s.gcr.io/etcd
 #  - docker pull k8s.gcr.io/hyperkube
