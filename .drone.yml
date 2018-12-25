@@ -4,13 +4,21 @@ name: default
 steps:
 - name: k8s
   image: docker:dind
-#  volumes:
-#  - name: dockersock
-#    path: /var/run/docker.sock
+  volumes:
+  - name: dockersock
+    path: /var/run
   commands:
-  - docker images
+  - sleep 5 # give docker enough time to start
+  - docker ps -a
 
-#volumes:
-#- name: dockersock
-#  host:
-#    path: /var/run/docker.sock
+services:
+- name: docker
+  image: docker:dind
+  privileged: true
+  volumes:
+  - name: dockersock
+    path: /var/run
+
+volumes:
+- name: dockersock
+  temp: {}
