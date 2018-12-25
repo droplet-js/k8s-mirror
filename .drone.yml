@@ -3,10 +3,19 @@ name: default
 
 steps:
 - name: k8s
-  image: docker
-  privileged: true
+  image: centos
+#  privileged: true
 #  volumes:
 #  - /var/run/docker.sock:/var/run/docker.sock
   commands:
-  - docker pull k8s.gcr.io/etcd
-  - docker pull k8s.gcr.io/hyperkube
+  - yum install -y yum-utils \
+    device-mapper-persistent-data \
+    lvm2
+  - yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+  - yum install docker-ce
+  - systemctl start docker
+  - docker run hello-world
+#  - docker pull k8s.gcr.io/etcd
+#  - docker pull k8s.gcr.io/hyperkube
