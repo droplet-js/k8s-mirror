@@ -1,16 +1,31 @@
 kind: pipeline
 name: default
 
+platform:
+  os: linux
+  arch: amd64
+
 clone:
   disable: true
 
 steps:
-- name: k8s
-  image: v7lin/centos_docker
+- name: kubernetes
+  image: docker:git
   commands:
-  - systemctl start docker
-  - docker pull hello-world
-#  - docker tag hello-world v7lin/hello-world
-#  - docker push v7lin/hello-world
-##  - docker pull k8s.gcr.io/etcd
-##  - docker pull k8s.gcr.io/hyperkube
+  - git clone -b v1.13.1 https://github.com/kubernetes/kubernetes.git .
+
+- name: build
+  image: centos
+  commands:
+  - build/run.sh make cross
+
+#- name: publish
+#  image: plugins/docker
+#  settings:
+#    repo: v7lin/centos_docker
+#    username:
+#      from_secret: REGISTRY_USER
+#    password:
+#      from_secret: REGISTRY_PASSWORD
+#    tags:
+#    - latest
