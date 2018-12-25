@@ -1,0 +1,11 @@
+sudo: required
+
+services:
+  - docker pull k8s.gcr.io/etcd
+  - docker pull k8s.gcr.io/hyperkube
+
+before_install:
+  - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD
+
+script:
+  - docker
