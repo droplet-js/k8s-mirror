@@ -4,7 +4,7 @@ services:
   - docker
 
 script:
-  - docker pull k8s.gcr.io/etcd
+  - docker pull k8s.gcr.io/etcd:3.2.24
   - docker images
   - docker login -u ${REGISTRY_USER} -p ${REGISTRY_PASSWORD}
 #  - docker pull k8s.gcr.io/etcd
