@@ -5,8 +5,8 @@ steps:
 - name: k8s
   image: docker
   privileged: true
-  volumes:
-  - /var/run/docker.sock:/var/run/docker.sock
+#  volumes:
+#  - /var/run/docker.sock:/var/run/docker.sock
   commands:
   - docker pull k8s.gcr.io/etcd
   - docker pull k8s.gcr.io/hyperkube
