@@ -3,16 +3,18 @@ sudo: required
 services:
   - docker
 
+env:
+  - ETCD_VERSION=3.2.24
+  - HYPERKUBE_VERSION=v1.13.1
+
 before_install:
   - docker login -u ${REGISTRY_USER} -p ${REGISTRY_PASSWORD}
 
 script:
-  - docker pull k8s.gcr.io/etcd:3.2.24
-  - docker pull k8s.gcr.io/hyperkube:v1.13.1
-  - docker images
-  - docker tag k8s.gcr.io/etcd:3.2.24 v7lin/k8s.gcr.io_etcd:3.2.24
-  - docker push v7lin/k8s.gcr.io_etcd:3.2.24
-  - docker tag k8s.gcr.io/hyperkube:v1.13.1 v7lin/k8s.gcr.io_hyperkube:v1.13.1
-  - docker push v7lin/k8s.gcr.io_hyperkube:v1.13.1
-#  - docker pull k8s.gcr.io/etcd
-#  - docker pull k8s.gcr.io/hyperkube
+  - docker pull k8s.gcr.io/etcd:${ETCD_VERSION}
+  - docker tag k8s.gcr.io/etcd:${ETCD_VERSION} v7lin/k8s.gcr.io_etcd:${ETCD_VERSION}
+  - docker push v7lin/k8s.gcr.io_etcd:${ETCD_VERSION}
+  - docker pull k8s.gcr.io/hyperkube:${HYPERKUBE_VERSION}
+  - docker tag k8s.gcr.io/hyperkube:${HYPERKUBE_VERSION} v7lin/k8s.gcr.io_hyperkube:${HYPERKUBE_VERSION}
+  - docker push v7lin/k8s.gcr.io_hyperkube:${HYPERKUBE_VERSION}
+
