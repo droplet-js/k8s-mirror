@@ -9,8 +9,6 @@ services:
     image: v7lin/k8s.gcr.io_etcd:${ETCD_VERSION}
     restart: always
     network_mode: host
-    volumes:
-      - etcd-data:/var/etcd/data
     command: |
       --listen-client-urls=http://0.0.0.0:4001
       --advertise-client-urls=http://127.0.0.1:4001
@@ -32,15 +30,15 @@ services:
       - /var/run:/var/run:rw
     command: |
       /hyperkube kubelet
-        --containerized
-        --hostname-override=127.0.0.1
-        --address=0.0.0.0
-        --api-servers=http://127.0.0.1:8080
-        --cluster-dns=10.0.0.10
-        --cluster-domain=cluster.local
-        --allow-privileged=true
-        --v=1
-        --logtostderr=true
+      --containerized
+      --hostname-override=127.0.0.1
+      --address=0.0.0.0
+      --api-servers=http://127.0.0.1:8080
+      --cluster-dns=10.0.0.10
+      --cluster-domain=cluster.local
+      --allow-privileged=true
+      --v=1
+      --logtostderr=true
     depends_on:
       - apiserver
 
@@ -51,14 +49,14 @@ services:
     network_mode: host
     command: |
       /hyperkube apiserver
-        --insecure-bind-address=0.0.0.0
-        --insecure-port=8080
-        --service-cluster-ip-range=10.0.0.1/24
-        --etcd-servers=http://127.0.0.1:4001
-        --min-request-timeout=300
-        --allow-privileged=true
-        --v=1
-        --logtostderr=true
+      --insecure-bind-address=0.0.0.0
+      --insecure-port=8080
+      --service-cluster-ip-range=10.0.0.1/24
+      --etcd-servers=http://127.0.0.1:4001
+      --min-request-timeout=300
+      --allow-privileged=true
+      --v=1
+      --logtostderr=true
     depends_on:
       - etcd
 
@@ -69,10 +67,10 @@ services:
     network_mode: host
     command: |
       /hyperkube controller-manager
-        --master=http://127.0.0.1:8080
-        --min-resync-period=3m
-        --v=1
-        --logtostderr=true
+      --master=http://127.0.0.1:8080
+      --min-resync-period=3m
+      --v=1
+      --logtostderr=true
     depends_on:
       - apiserver
 
@@ -83,9 +81,9 @@ services:
     network_mode: host
     command: |
       /hyperkube scheduler
-        --master=http://127.0.0.1:8080
-        --v=1
-        --logtostderr=true
+      --master=http://127.0.0.1:8080
+      --v=1
+      --logtostderr=true
     depends_on:
       - apiserver
 
@@ -97,8 +95,8 @@ services:
     network_mode: host
     command: |
       /hyperkube proxy
-        --master=http://127.0.0.1:8080
-        --v=1
-        --logtostderr=true
+      --master=http://127.0.0.1:8080
+      --v=1
+      --logtostderr=true
     depends_on:
       - apiserver
